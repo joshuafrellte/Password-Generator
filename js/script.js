@@ -46,7 +46,6 @@ lengthSlider.oninput = function() { setPasswordLength() }
 
 // Generate password on generate button click
 generateBtn.onclick = function() {
-    console.log(generatedPassword)
     setGeneratedPassword()
 }
 
@@ -71,9 +70,9 @@ function getGeneratedPassword() { return generatePassword(getPasswordLength(), i
 function setGeneratedPassword() { 
     generatedPassword.value = getGeneratedPassword()
     console.log(generatedPassword.value)
-    measurePasswordStrength() 
     setPasswordStrength()
     setStrengthBarColors()
+    displayPasswordStats()
 }
 
 // Primary password generation logic
@@ -108,8 +107,6 @@ function measurePasswordStrength() {
     if (passwordLength >= 8 && charTypes >= 2) strength++
     if (passwordLength >= 12 && charTypes >= 3) strength++
     if (passwordLength >= 16 && charTypes == 4) strength++
-
-    console.log(`len: ${passwordLength}, type: ${charTypes}, str: ${strength}`)
 
     return strength
 }
@@ -154,3 +151,12 @@ function resetStrengthBarColors() {
         bar.style.backgroundColor = "transparent"
     })
 }
+
+// Log password length, char types, and strength into console 
+function displayPasswordStats() {
+    const length = getPasswordLength()
+    const types = getCheckedBoxCount()
+    const strength = getPasswordStrength()
+    console.log(`len: ${length}, type: ${types}, str: ${strength}`)
+}
+
