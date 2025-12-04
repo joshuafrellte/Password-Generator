@@ -13,12 +13,14 @@ const generateBtn = document.getElementById('generateBtn')
 const inputs = [lengthSlider, upperCheckbox, lowerCheckbox, numberCheckbox, symbolCheckbox]
 const checkboxes = [upperCheckbox, lowerCheckbox, numberCheckbox, symbolCheckbox]
 
+// Generates default password on load
 document.body.onload = function() {
     lowerCheckbox.checked = true;
     setPasswordLength()
     setGeneratedPassword()
 }
 
+// At least one checkbox always has to be checked
 checkboxes.forEach(checkbox => {
     checkbox.onchange = function() {
         const checkedCount = checkboxes.filter(checkbox => checkbox.checked).length;
@@ -31,22 +33,27 @@ checkboxes.forEach(checkbox => {
     }
 })
 
+// Change copy button colors on hover
 copyBtn.onmouseover = function() { copyIcon.style.filter = "invert(0%)" }
 copyBtn.onmouseleave = function() { copyIcon.style.filter = "invert(95%)" }
+
+// Generate password on length slider click
 lengthSlider.oninput = function() { setPasswordLength() }
 
+// Generate password on generate button click
 generateBtn.onclick = function() {
     console.log(generatedPassword)
-    console.log("generate button clicked!")
     setGeneratedPassword()
 }
 
+// Clicking any input generates a new password
 inputs.forEach(input => { 
     input.onclick = function() {
         setGeneratedPassword()
     }
 })
 
+// Setters, getters, and observers
 function getGeneratedPassword() { return generatePassword(getPasswordLength(), includeLower(), includeUpper(), includeNumbers(), includeSymbols()) }
 function setGeneratedPassword() { generatedPassword.value = getGeneratedPassword() }
 function getPasswordLength() { return lengthSlider.value }
@@ -56,6 +63,7 @@ function includeLower() { return lowerCheckbox.checked }
 function includeNumbers() { return numberCheckbox.checked }
 function includeSymbols() { return symbolCheckbox.checked }
 
+// Primary password generation logic
 function generatePassword(length, lower, upper, number, symbol) {
     const lowerChars = "abcdefghijklmnopqrstuvwxyz"
     const upperChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
