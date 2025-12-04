@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,300..800;1,300..800&display=swap');
 
 * {
-    font-family: 'Google Sans Code';
+    font-family: 'Google Sans Code', consolas;
     color: white;
 }
 
@@ -35,8 +35,9 @@ button {
 
 #appArea h1 {
     display: block;
-    font-size: 20px;
-    margin: 8px 0;
+    font-size: 16px;
+    color: rgb(173, 173, 173);
+    margin: 0;
 }
 
 .panels {
@@ -44,7 +45,7 @@ button {
     background-color: rgb(34, 34, 34);
     border-radius: 3px;
     margin: 10px;
-    padding: 5px 10px;
+    padding: 10px;
 }
 
 #outputPanel {
@@ -57,7 +58,7 @@ button {
     background-color: rgb(34, 34, 34);
     border: none;
     padding: 5px;
-    width: 200px
+    width: 200px;
 }
 
 #copyIcon {
@@ -66,7 +67,19 @@ button {
     height: 100%;
 }
 
+#controlPanel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#passwordLengthPanel {
+    width: 90%;
+}
+
 #lengthLabels {
+    font-size: 14px;
     display: flex;
     justify-content: space-between;
     padding: 5px;
@@ -92,36 +105,30 @@ input[type="range"]::-webkit-slider-thumb {
   cursor: pointer;
 }
 
-#controlPanel {
-}
-
 #controlPanel > * {
     padding: 10px;
 }
 
-#generateButton {
-    font-size: 16px;
-    font-weight: bold;
-    width: 90%;
-    margin: 10px;
-}
-
 #checkboxGrid {
-    text-align: left;
-    display: inline-block;
+    margin-bottom: 6px;
 }
 
 .checkboxes {
+    font-size: 13px;
     margin-bottom: 5px;
+    display: flex;
+    align-items: center;
 }
 
 .checkboxes input {
-    padding: 10px;
+    margin-right: 8px;
 }
 
 #strengthPanel {
     background-color:rgb(19, 19, 19);
-    margin: 0 12px;
+    font-size: 12px;
+    text-transform: uppercase;
+    width: 224px;
     border-radius: 3px;
     display: flex;
     justify-content: space-between;
@@ -134,7 +141,6 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 #strengthStatus label {
-    font-size: 17px;
     margin: 0 8px;
 }
 
@@ -150,25 +156,76 @@ input[type="range"]::-webkit-slider-thumb {
     margin: 0 2px;
 }
 
-@media screen and (min-width: 600px) {
-    /* * {
-        font-size: 18px
-    }
-    .panels {
-        width: 500px;
-    }
-    #checkboxGrid {
-        width: 70%;
-        margin: 0 auto;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        column-gap: 33px;
+#generateButton {
+    font-weight: bold;
+    width: 95%;
+    margin: 10px auto;
+    padding: 12px 0;
+}
 
-    } */
+@media screen and (min-width: 600px) {
     #appArea {
         transform: scale(1.5);
     }
+    #generateButton {
+        font-size: 16px;
+    }
 }
+
+@media screen and (min-width: 1000px) {
+    .panels {
+        width: 500px;
+    }
+    #controlPanel {
+        display: grid;
+        grid-template-columns: 200px 300px;
+        grid-template-rows: 80px;
+        grid-template-areas: 
+        "length length"
+        "check strength"
+        "check generate";
+    }
+    #passwordLengthPanel {
+        
+    }
+    #strengthPanel {
+
+    }
+    #generateButton {
+        width: 224px;
+    }
+}
+
+/* @media screen and (min-width: 1000px) {
+    .panels {
+        width: 500px;
+    }
+    #outputPanel input {
+        width: 444px;
+    }
+    #checkboxGrid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        margin: 0 0 6px 80px ;
+        row-gap: 10px;;
+    }
+    .checkboxes input {
+        transform: scale(1.2);
+    }
+    #strengthPanel {
+        font-size: 16px;
+        width: 91%; 
+        width: 456px;
+    }
+    #strengthStatus label {
+        margin: 0 12px;
+    }
+    #strengthBars > * {
+        width: 6px;
+    }
+} */
+
+
 
 
 
