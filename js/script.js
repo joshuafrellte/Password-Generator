@@ -23,10 +23,7 @@ document.body.onload = function() {
 // At least one checkbox always has to be checked
 checkboxes.forEach(checkbox => {
     checkbox.onchange = function() {
-        const checkedCount = checkboxes.filter(checkbox => checkbox.checked).length;
-        console.log(checkedCount)
-
-        if (checkedCount === 0) {
+        if (getCheckedBoxCount() === 0) {
             this.checked = true;
             setGeneratedPassword()
         }
@@ -54,8 +51,9 @@ inputs.forEach(input => {
 })
 
 // Setters, getters, and observers
+function getCheckedBoxCount() { return checkboxes.filter(checkbox => checkbox.checked).length }
 function getGeneratedPassword() { return generatePassword(getPasswordLength(), includeLower(), includeUpper(), includeNumbers(), includeSymbols()) }
-function setGeneratedPassword() { generatedPassword.value = getGeneratedPassword() }
+function setGeneratedPassword() { generatedPassword.value = getGeneratedPassword(); getPasswordStrength() }
 function getPasswordLength() { return lengthSlider.value }
 function setPasswordLength() { passwordLength.textContent = getPasswordLength() }
 function includeUpper() { return upperCheckbox.checked }
@@ -83,6 +81,22 @@ function generatePassword(length, lower, upper, number, symbol) {
     }
 
     return password;
+}
+
+function getPasswordStrength() {
+    const passwordLength = getPasswordLength()
+    const charTypes = getCheckedBoxCount()
+
+    let strength = 0
+    if (passwordLength >= 0 || charTypes >= 1) strength++
+    if (passwordLength >= 8 && charTypes >= 2) strength++
+    if (passwordLength >= 12 && charTypes >= 3) strength++
+    if (passwordLength >= 16 && charTypes == 4) strength++
+
+    console.log(`length: ${passwordLength}`)
+    console.log(`charTypes: ${charTypes}`)
+    console.log(`strength: ${strength}`)
+    console.log("====================")
 }
 
 
