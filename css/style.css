@@ -3,6 +3,7 @@
 * {
     font-family: 'Google Sans Code', consolas;
     color: white;
+    transition: 0.1s ease;
 }
 
 body {
@@ -67,6 +68,10 @@ button {
     height: 100%;
 }
 
+#outputPanel button:hover {
+    background-color: rgb(31, 63, 53);
+}
+
 #controlPanel {
     display: flex;
     flex-direction: column;
@@ -100,9 +105,13 @@ input[type="range"]::-webkit-slider-thumb {
   appearance: none;
   width: 15px; 
   height: 15px;
-  background: mediumaquamarine; 
+  background: rgb(106, 214, 178); 
   border-radius: 50%; 
   cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+    background-color:rgb(111, 233, 194);
 }
 
 #controlPanel > * {
@@ -164,6 +173,11 @@ input[type="range"]::-webkit-slider-thumb {
     font-weight: bold;
     margin: 10px auto;
     padding: 12px 0;
+}
+
+#generateButton:hover {
+    background-color:rgb(31, 63, 53);
+    color: rgb(255, 255, 255);
 }
 
 @media screen and (min-width: 600px) {
