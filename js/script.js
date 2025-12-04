@@ -35,6 +35,12 @@ checkboxes.forEach(checkbox => {
 copyBtn.onmouseover = function() { copyIcon.style.filter = "invert(0%)" }
 copyBtn.onmouseleave = function() { copyIcon.style.filter = "invert(95%)" }
 
+// Copy button logic
+copyBtn.onclick = function () {
+    navigator.clipboard.writeText(generatedPassword.value)
+    console.log("Password copied to clipboard!")
+}
+
 // Generate password on length slider click
 lengthSlider.oninput = function() { setPasswordLength() }
 
