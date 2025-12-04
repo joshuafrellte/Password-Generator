@@ -1,0 +1,148 @@
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,300..800;1,300..800&display=swap');
+
+* {
+    font-family: 'Google Sans Code';
+    color: white;
+}
+
+body {
+    background-color: rgb(22, 22, 22);
+    text-align: center;
+}
+
+button {
+    text-transform: uppercase;
+    background-color: mediumaquamarine;
+    color: rgb(22, 22, 22);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#appArea {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+#appArea h1 {
+    display: block;
+    font-size: 20px;
+    margin: 8px 0;
+}
+
+.panels {
+    width: 256px;
+    background-color: rgb(34, 34, 34);
+    border-radius: 5px;
+    margin: 10px;
+    padding: 5px 10px;
+}
+
+#outputPanel {
+    display: flex;
+    justify-content: space-between;
+}
+
+#outputPanel input {
+    font-size: 18px;
+    background-color: rgb(34, 34, 34);
+    border: none;
+    padding: 5px;
+    width: 200px
+}
+
+#copyIcon {
+    filter: invert(95%);
+    width: 100%;
+    height: 100%;
+}
+
+#lengthLabels {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 5px; 
+  border-radius: 10px;
+  background: #525252; 
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px; 
+  height: 15px;
+  background: mediumaquamarine; 
+  border-radius: 50%; 
+  cursor: pointer;
+}
+
+#controlPanel {
+}
+
+#controlPanel > * {
+    padding: 10px;
+}
+
+#generateButton {
+    font-size: 16px;
+    font-weight: bold;
+    width: 90%;
+    margin: 10px;
+}
+
+#checkboxGrid {
+    text-align: left;
+    display: inline-block;
+}
+
+.checkboxes {
+    margin-bottom: 5px;
+}
+
+.checkboxes input {
+    padding: 10px;
+}
+
+#strengthPanel {
+    background-color:rgb(19, 19, 19);
+    margin: 0 12px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#strengthStatus {
+    display: flex;
+    align-items: center;
+}
+
+#strengthStatus label {
+    font-size: 17px;
+    margin: 0 10px;
+}
+
+#strengthBars {
+    display: flex;
+}
+
+#strengthBars > * {
+    border: 2px solid white;
+    border-radius: 2px;
+    width: 5px;
+    height: 24px;
+    margin: 0 2px;
+}
+
+
+
