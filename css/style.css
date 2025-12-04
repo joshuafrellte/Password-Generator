@@ -32,6 +32,7 @@ button {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    transform: scale(1.15);
 }
 
 #appArea h1 {
