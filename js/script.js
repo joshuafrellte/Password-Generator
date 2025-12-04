@@ -7,6 +7,7 @@ const upperCheckbox = document.getElementById('upperCheckbox')
 const lowerCheckbox = document.getElementById('lowerCheckbox')
 const numberCheckbox = document.getElementById('numberCheckbox')
 const symbolCheckbox = document.getElementById('symbolCheckbox')
+const strengthLabel = document.getElementById('strengthLabel')
 const strengthBars = document.getElementsByClassName('strengthBars')
 const generateBtn = document.getElementById('generateBtn')
 
@@ -52,14 +53,22 @@ inputs.forEach(input => {
 
 // Setters, getters, and observers
 function getCheckedBoxCount() { return checkboxes.filter(checkbox => checkbox.checked).length }
-function getGeneratedPassword() { return generatePassword(getPasswordLength(), includeLower(), includeUpper(), includeNumbers(), includeSymbols()) }
-function setGeneratedPassword() { generatedPassword.value = getGeneratedPassword(); getPasswordStrength() }
 function getPasswordLength() { return lengthSlider.value }
 function setPasswordLength() { passwordLength.textContent = getPasswordLength() }
 function includeUpper() { return upperCheckbox.checked }
 function includeLower() { return lowerCheckbox.checked }
 function includeNumbers() { return numberCheckbox.checked }
 function includeSymbols() { return symbolCheckbox.checked }
+function getPasswordStrength() { return measurePasswordStrength() }
+function setPasswordStrength() { strengthLabel.textContent = getPasswordStrengthString() }
+function getGeneratedPassword() { return generatePassword(getPasswordLength(), includeLower(), includeUpper(), includeNumbers(), includeSymbols()) }
+function setGeneratedPassword() { 
+    generatedPassword.value = getGeneratedPassword(); 
+    console.log(generatedPassword.value)
+    measurePasswordStrength() 
+    setPasswordStrength()
+    setStrengthBarColors()
+}
 
 // Primary password generation logic
 function generatePassword(length, lower, upper, number, symbol) {
@@ -83,7 +92,8 @@ function generatePassword(length, lower, upper, number, symbol) {
     return password;
 }
 
-function getPasswordStrength() {
+// Quantify password strength
+function measurePasswordStrength() {
     const passwordLength = getPasswordLength()
     const charTypes = getCheckedBoxCount()
 
@@ -93,11 +103,46 @@ function getPasswordStrength() {
     if (passwordLength >= 12 && charTypes >= 3) strength++
     if (passwordLength >= 16 && charTypes == 4) strength++
 
-    console.log(`length: ${passwordLength}`)
-    console.log(`charTypes: ${charTypes}`)
-    console.log(`strength: ${strength}`)
-    console.log("====================")
+    console.log(`len: ${passwordLength}, type: ${charTypes}, str: ${strength}`)
+
+    return strength
 }
 
+// Label password strength based on measured quantity
+function getPasswordStrengthString() {
+    const strength = measurePasswordStrength()
+    let strengthString = ""
 
+    if (strength === 1) strengthString = "Weak"
+    if (strength === 2) strengthString = "Medium"
+    if (strength === 3) strengthString = "Strong"
+    if (strength === 4) strengthString = "Very Strong"
 
+    return strengthString
+}
+
+function setStrengthBarColors() {
+    resetStrengthBarColors()
+    const strength = measurePasswordStrength()
+    
+    for (let i=0; i<strength; i++) { 
+        if (strength === 1) {
+            strengthBars[i].style.backgroundColor = "red" 
+        }
+        if (strength === 2) {
+            strengthBars[i].style.backgroundColor = "orange" 
+        }
+        if (strength === 3) {
+            strengthBars[i].style.backgroundColor = "yellowgreen" 
+        }
+        if (strength === 4) {
+            strengthBars[i].style.backgroundColor = "green" 
+        }
+    }
+}
+
+function resetStrengthBarColors() {
+    Array.from(strengthBars).forEach(bar => {
+        bar.style.backgroundColor = "transparent";
+    })
+}
