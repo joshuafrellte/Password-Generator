@@ -63,13 +63,17 @@ button {
 }
 
 #copyIcon {
-    filter: invert(95%);
+    filter: invert(99%);
     width: 100%;
     height: 100%;
 }
 
 #outputPanel button:hover {
     background-color: rgb(31, 63, 53);
+}
+
+#outputPanel button:active {
+    background-color: rgb(17, 34, 28);
 }
 
 #controlPanel {
@@ -178,6 +182,10 @@ input[type="range"]::-webkit-slider-thumb:hover {
 #generateBtn:hover {
     background-color:rgb(31, 63, 53);
     color: rgb(255, 255, 255);
+}
+
+#generateBtn:active {
+    background-color: rgb(17, 34, 28);
 }
 
 @media screen and (min-width: 600px) {

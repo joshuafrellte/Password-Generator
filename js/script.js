@@ -16,7 +16,7 @@ const checkboxes = [upperCheckbox, lowerCheckbox, numberCheckbox, symbolCheckbox
 
 // Generates default password on load
 document.body.onload = function() {
-    lowerCheckbox.checked = true;
+    lowerCheckbox.checked = true
     setPasswordLength()
     setGeneratedPassword()
 }
@@ -25,7 +25,7 @@ document.body.onload = function() {
 checkboxes.forEach(checkbox => {
     checkbox.onchange = function() {
         if (getCheckedBoxCount() === 0) {
-            this.checked = true;
+            this.checked = true
             setGeneratedPassword()
         }
     }
@@ -33,7 +33,7 @@ checkboxes.forEach(checkbox => {
 
 // Change copy button colors on hover
 copyBtn.onmouseover = function() { copyIcon.style.filter = "invert(0%)" }
-copyBtn.onmouseleave = function() { copyIcon.style.filter = "invert(95%)" }
+copyBtn.onmouseleave = function() { copyIcon.style.filter = "invert(99%)" }
 
 // Copy button logic
 copyBtn.onclick = function () {
@@ -69,7 +69,7 @@ function getPasswordStrength() { return measurePasswordStrength() }
 function setPasswordStrength() { strengthLabel.textContent = getPasswordStrengthString() }
 function getGeneratedPassword() { return generatePassword(getPasswordLength(), includeLower(), includeUpper(), includeNumbers(), includeSymbols()) }
 function setGeneratedPassword() { 
-    generatedPassword.value = getGeneratedPassword(); 
+    generatedPassword.value = getGeneratedPassword()
     console.log(generatedPassword.value)
     measurePasswordStrength() 
     setPasswordStrength()
@@ -89,13 +89,13 @@ function generatePassword(length, lower, upper, number, symbol) {
     if (number) charset += numChars
     if (symbol) charset += specialChars
 
-    let password = "";
+    let password = ""
     for (let i=0; i<length; i++) {
         const randomIndex = Math.floor(Math.random() * charset.length)
         password += charset[randomIndex]
     }
 
-    return password;
+    return password
 }
 
 // Quantify password strength
@@ -127,6 +127,7 @@ function getPasswordStrengthString() {
     return strengthString
 }
 
+// Fill bars and color them based on strength
 function setStrengthBarColors() {
     resetStrengthBarColors()
     const strength = measurePasswordStrength()
@@ -147,8 +148,9 @@ function setStrengthBarColors() {
     }
 }
 
+// Clear bar fills and colors to prevent previous colors from staying
 function resetStrengthBarColors() {
     Array.from(strengthBars).forEach(bar => {
-        bar.style.backgroundColor = "transparent";
+        bar.style.backgroundColor = "transparent"
     })
 }
