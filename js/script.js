@@ -66,7 +66,7 @@ function includeNumbers() { return numberCheckbox.checked }
 function includeSymbols() { return symbolCheckbox.checked }
 function getPasswordStrength() { return measurePasswordStrength() }
 function setPasswordStrength() { strengthLabel.textContent = getPasswordStrengthString() }
-function getGeneratedPassword() { return generatePassword(getPasswordLength(), includeLower(), includeUpper(), includeNumbers(), includeSymbols()) }
+function getGeneratedPassword() { return generatePassword() }
 function setGeneratedPassword() { 
     generatedPassword.value = getGeneratedPassword()
     console.log(generatedPassword.value)
@@ -76,20 +76,20 @@ function setGeneratedPassword() {
 }
 
 // Primary password generation logic
-function generatePassword(length, lower, upper, number, symbol) {
+function generatePassword() {
     const lowerChars = "abcdefghijklmnopqrstuvwxyz"
     const upperChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     const numChars = "0123456789"
     const specialChars = "!@#$%^&*()-_=+[]{}|;:,.<>?"
     let charset = ""
 
-    if (lower) charset += lowerChars
-    if (upper) charset += upperChars
-    if (number) charset += numChars
-    if (symbol) charset += specialChars
+    if (includeLower()) charset += lowerChars
+    if (includeUpper()) charset += upperChars
+    if (includeNumbers()) charset += numChars
+    if (includeSymbols()) charset += specialChars
 
     let password = ""
-    for (let i=0; i<length; i++) {
+    for (let i=0; i<getPasswordLength(); i++) {
         const randomIndex = Math.floor(Math.random() * charset.length)
         password += charset[randomIndex]
     }
