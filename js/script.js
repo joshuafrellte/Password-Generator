@@ -97,52 +97,93 @@ function generatePassword() {
     return password
 }
 
-// Quantify password strength
+// Quantify password strength using entropy
 function measurePasswordStrength() {
-    const passwordLength = getPasswordLength()
-    const charTypes = getCheckedBoxCount()
+    let charset = 0
+    const password = generatedPassword.value
 
-    let strength = 0
-    if (passwordLength >= 0 || charTypes >= 1) strength++
-    if (passwordLength >= 8 && charTypes >= 2) strength++
-    if (passwordLength >= 12 && charTypes >= 3) strength++
-    if (passwordLength >= 16 && charTypes == 4) strength++
+    if (/[a-z]/.test(password)) charset += 26
+    if (/[A-Z]/.test(password)) charset += 26
+    if (/[0-9]/.test(password)) charset += 10
+    if (/[^A-Za-z0-9]/.test(password)) charset += 32 
+    if (charset === 0) return 0
 
-    return strength
+    return password.length * Math.log2(charset)
 }
 
-// Label password strength based on measured quantity
+// Descriptive equivalent of password strength
 function getPasswordStrengthString() {
     const strength = measurePasswordStrength()
-    let strengthString = ""
 
-    if (strength === 1) strengthString = "Weak"
-    if (strength === 2) strengthString = "Medium"
-    if (strength === 3) strengthString = "Strong"
-    if (strength === 4) strengthString = "Very Strong"
-
-    return strengthString
+    if (strength === 0) return "💀"
+    if (strength < 28) return "Very Weak"
+    if (strength < 36) return "Weak"
+    if (strength < 60) return "Medium"
+    if (strength < 128) return "Strong"
+    return "Very Strong"
+    console.log(measurePasswordStrength())
 }
+
+// function measurePasswordStrength() {
+//     const passwordLength = getPasswordLength()
+//     const charTypes = getCheckedBoxCount()
+
+//     let strength = 0
+//     if (passwordLength >= 0 || charTypes >= 1) strength++
+//     if (passwordLength >= 8 && charTypes >= 2) strength++
+//     if (passwordLength >= 12 && charTypes >= 3) strength++
+//     if (passwordLength >= 16 && charTypes == 4) strength++
+
+//     return strength
+// }
+
+// Label password strength based on measured quantity
+// function getPasswordStrengthString() {
+//     const strength = measurePasswordStrength()
+//     let strengthString = ""
+
+//     if (strength === 0) strengthString = "Very Weak"
+//     if (strength === 1) strengthString = "Weak"
+//     if (strength === 2) strengthString = "Medium"
+//     if (strength === 3) strengthString = "Strong"
+//     if (strength === 4) strengthString = "Very Strong"
+
+//     return strengthString
+// }
 
 // Fill bars and color them based on strength
 function setStrengthBarColors() {
     resetStrengthBarColors()
-    const strength = measurePasswordStrength()
+    const bars = getBars()
     
-    for (let i=0; i<strength; i++) { 
-        if (strength === 1) {
+    for (let i=0; i<bars; i++) { 
+        if (bars === 1) {
             strengthBars[i].style.backgroundColor = "red" 
         }
-        if (strength === 2) {
+        else if (bars === 2) {
             strengthBars[i].style.backgroundColor = "orange" 
         }
-        if (strength === 3) {
+        else if (bars === 3) {
+            strengthBars[i].style.backgroundColor = "yellow" 
+        }
+        else if (bars === 4) {
             strengthBars[i].style.backgroundColor = "yellowgreen" 
         }
-        if (strength === 4) {
+        else {
             strengthBars[i].style.backgroundColor = "green" 
         }
     }
+}
+
+// Get how many bars to fill
+function getBars() {
+    const strength = measurePasswordStrength()
+    if (strength === 0) { return 0 }
+    else if (strength < 28) { return 1 }
+    else if (strength < 36) { return 2 }
+    else if (strength < 60) { return 3 }
+    else if (strength < 128) { return 4}
+    else { return 5 }
 }
 
 // Clear bar fills and colors to prevent previous colors from staying
