@@ -21,16 +21,6 @@ document.body.onload = function() {
     setGeneratedPassword()
 }
 
-// At least one checkbox always has to be checked
-checkboxes.forEach(checkbox => {
-    checkbox.onchange = function() {
-        if (getCheckedBoxCount() === 0) {
-            this.checked = true
-            setGeneratedPassword()
-        }
-    }
-})
-
 // Change copy button colors on hover
 copyBtn.onmouseover = function() { copyIcon.style.filter = "invert(0%)" }
 copyBtn.onmouseleave = function() { copyIcon.style.filter = "invert(99%)" }
@@ -50,8 +40,12 @@ generateBtn.onclick = function() {
 }
 
 // Clicking any input generates a new password
+// At least one checkbox always has to be checked
 inputs.forEach(input => { 
     input.onchange = function() {
+        if (getCheckedBoxCount() === 0) {
+            this.checked = true
+        }
         setGeneratedPassword()
     }
 })
