@@ -51,7 +51,7 @@ generateBtn.onclick = function() {
 
 // Clicking any input generates a new password
 inputs.forEach(input => { 
-    input.onclick = function() {
+    input.onchange = function() {
         setGeneratedPassword()
     }
 })
