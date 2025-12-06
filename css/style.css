@@ -138,6 +138,10 @@ input[type="range"]::-webkit-slider-thumb:hover {
     margin-right: 8px;
 }
 
+input[type="checkbox"] {
+    accent-color: rgb(106, 214, 178);
+}
+
 #strengthPanel {
     background-color:rgb(19, 19, 19);
     font-size: 11px;
